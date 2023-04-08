@@ -14,7 +14,7 @@
 
 ---
 
-### Codecademy Prjects
+### Codecademy Projects
 
  - [Arabica Coffee Exploration](https://www.kaggle.com/code/mikemiller117/codecadamy-final-project-data-analysis) (Final Project) - Links to the Kaggle Notebook
 <img src="images/grade_by_variety.png?raw=true" height="320" width="480" />
