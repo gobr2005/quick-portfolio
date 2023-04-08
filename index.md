@@ -2,33 +2,25 @@
 
 ---
 
-### Category Name 1 
+### Personal Projects
 
-[Project 1 Title](/sample_page)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
----
-[Project 2 Title](/pdf/sample_presentation.pdf)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
----
-[Project 3 Title](http://example.com/)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+- [Excel to Google Sheets](/excel_to_gs)
 
 ---
 
-### Category Name 2
+### BigQuery SQL for BigCommerce
 
-- [Project 1 Title](http://example.com/)
-- [Project 2 Title](http://example.com/)
-- [Project 3 Title](http://example.com/)
-- [Project 4 Title](http://example.com/)
-- [Project 5 Title](http://example.com/)
+- [Order Location Query](/order_location_sql)
 
 ---
 
+### Codecademy Prjects
 
+ - [Arabica Coffee Exploration](https://www.kaggle.com/code/mikemiller117/codecadamy-final-project-data-analysis) (Final Project) - Links to the Kaggle Notebook
+<img src="images/grade_by_variety.png?raw=true" height="320" width="480" />
 
+ - [FAA Wildlife Strike](https://public.tableau.com/views/FAAWildlifeStrike_16806281859640/Dashboard1?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link) (Data Visualization Porject) - Links to Tableau Public
+<img src="images/FAA-WIldlife-Strike_Tableau.png?raw=true" height="320" width="480" />
 
 ---
 <p style="font-size:11px">Page template forked from <a href="https://github.com/evanca/quick-portfolio">evanca</a></p>
