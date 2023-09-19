@@ -18,8 +18,5 @@ I designed this query to be a simple copy-and-paste to add your account informat
 
 1. Upload a CSV from the state's name and state postcodes.
 2. Copy and paste the [order_location](https://github.com/gobr2005/BigCommerceCode/blob/20a002e18a170dcbc304acc4f55cca4aed02489c/order_location/order_location.sql) code into BigQuery editor.
-3. You will need to update the table ids. By default, I set them as `project_name.store_name.bc_order_shipping_addresses` and kept the original table names that BigCommerce sends over. You can find the table ids in the table details. Below is an image of BigQuery's table details when clicking on the table. 
-
-![BigCommerce Order Shipping Address Table Details](https://github.com/gobr2005/BigCommerceCode/blob/e6951ca6401397a763cba089f4f518c4ee772d63/order_location/Image/BigQuery-%E2%80%93-bc-order-shipping-addresses-%E2%80%93-Google-Cloud-console.png)
-
-3. Save the query as a view so you can reuse it for different projects or add different information for further analysis. 
+3. You will need to update the table ids. By default, I set them as `project_name.store_name.bc_order_shipping_addresses` and kept the original table names that BigCommerce sends over. You can find the table ids in the table details. 
+4. Save the query as a view so you can reuse it for different projects or add different information for further analysis. 
