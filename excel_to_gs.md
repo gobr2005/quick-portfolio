@@ -1,6 +1,6 @@
 ## Excel to Google Sheets
 
-**Project description:** I created a couple of Python programs to quickly upload an Excel to Google Sheet. I created one to change the csv to a dataframe. This Python program calls the second python program. The second program connects to Google Sheet through the [gspread](https://docs.gspread.org/en/v5.7.1/) Python package. Both programs are currently used for a single specific Google Sheet I update regularly. I am think of better ways to make them more usable for other projects. 
+**Project description:** I created a couple of Python programs to quickly upload an Excel to Google Sheet. I created one to change the csv to a dataframe. This Python program calls the second python program. The second program connects to Google Sheet through the [gspread](https://docs.gspread.org/en/v5.7.1/) Python package. Both programs are currently used for a single specific Google Sheet I update regularly. I am thinking of better ways to make them more usable for other projects. 
 
 ### Converting Excel to a Dataframe.
 
