@@ -82,8 +82,17 @@ markup to paste:
 - Use `.jpg` for dashboards and photos, `.png` for charts with flat color or text that
   needs to stay crisp
 - If it reports over 200 KB, rerun with `-Quality 70`
-- Write alt text describing **what the image shows** ("Ticket volume by technician,
-  Jan–Jun"), not that it's an image — screen readers and search both read it
+- **Open the image and look at it before writing alt text.** Filenames lie, or at least
+  under-describe: a file called `faa_wildlife_strike.png` turned out to be four panels —
+  a US map, a phase-of-flight breakdown, a distance-from-airport scatter, and yearly
+  trends — none of which you'd guess from the name. Describe **what the image shows**
+  ("Ticket volume by technician, Jan–Jun"), not that it's an image; screen readers and
+  search both read it
+
+If you're **replacing** an existing image rather than adding one, the old file usually
+needs to go too — check nothing else references it (`grep -r "old-filename" .`), then
+`git rm` it in the same commit. Leaving the original behind means the repo keeps paying
+for the bytes you just saved.
 
 ## Step 4 — Register it in index.md
 
