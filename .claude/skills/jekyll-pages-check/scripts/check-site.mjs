@@ -30,6 +30,9 @@ const EXPECTED_DOMAIN = 'michaelmiller.page';
 
 const errors = [];
 const warnings = [];
+/** Site-wide `image` default from _config.yml, if one is set. Pages inherit it as
+ *  their share card, so a page without its own `image` is not necessarily bare. */
+let defaultImage = null;
 const err = (file, msg) => errors.push({ file, msg });
 const warn = (file, msg) => warnings.push({ file, msg });
 
@@ -60,6 +63,30 @@ const INLINE_TAGS = [
 const rootMarkdown = readdirSync(REPO)
   .filter((f) => extname(f) === '.md' && f !== 'README.md' && f !== 'CLAUDE.md')
   .map((f) => join(REPO, f));
+
+const configText = existsSync(join(REPO, '_config.yml')) ? read(join(REPO, '_config.yml')) : '';
+
+// A site-wide `image` under `defaults:` gives every page a share card, so read it
+// before checking pages — otherwise every page looks like it has no preview image.
+const configLines = configText.split(/\r?\n/);
+const defaultsAt = configLines.findIndex((l) => /^defaults:\s*$/.test(l));
+if (defaultsAt !== -1) {
+  // The block runs until the next top-level key (a line starting with a non-space).
+  const block = [];
+  for (let i = defaultsAt + 1; i < configLines.length; i++) {
+    const line = configLines[i];
+    if (line.trim() && !/^\s/.test(line)) break;
+    block.push(line);
+  }
+  const img = block.join('\n').match(/^\s+image:\s*(.+)$/m);
+  if (img) {
+    defaultImage = img[1].trim().replace(/^['"]|['"]$/g, '');
+    const onDisk = join(REPO, decodeURIComponent(defaultImage.replace(/^\//, '')));
+    if (!existsSync(onDisk)) {
+      err('_config.yml', `Default share image "${defaultImage}" does not exist, so every page gets a broken link preview.`);
+    }
+  }
+}
 
 /* ------------------------------------------------------------------ *
  * Front matter
@@ -128,7 +155,11 @@ for (const file of rootMarkdown) {
     if (fm.image && !existsSync(join(REPO, fm.image.replace(/^\//, '')))) {
       err(name, `Front matter image "${fm.image}" does not exist. Link previews will show a broken card.`);
     }
-    if (!fm.image) warn(name, 'No "image" in front matter, so shares of this page have no preview thumbnail.');
+    if (!fm.image && !defaultImage) {
+      warn(name, 'No "image" in front matter, so shares of this page have no preview thumbnail.');
+    } else if (!fm.image) {
+      warn(name, `No "image" in front matter, so shares fall back to the site default (${defaultImage}). A page-specific screenshot previews better.`);
+    }
   } else if (fm === null && name !== 'index.md') {
     warn(name, 'No front matter, so title comes from the first heading and the meta description falls back to the site-wide bio.');
   }
@@ -208,7 +239,6 @@ for (const file of rootMarkdown) {
   }
 }
 
-const configText = existsSync(join(REPO, '_config.yml')) ? read(join(REPO, '_config.yml')) : '';
 const layoutFiles = existsSync(join(REPO, '_layouts'))
   ? readdirSync(join(REPO, '_layouts')).map((f) => join(REPO, '_layouts', f))
   : [];

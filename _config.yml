@@ -16,3 +16,12 @@ description: > # your text below (remove <br> elements if you don't need line br
   
 theme: jekyll-theme-minimal
 google_analytics: G-QSZL9GBWDF # your Google Analytics tracking ID here
+
+# Fallback share image, so a link posted to LinkedIn gets a card instead of a bare
+# text row. Pages with their own screenshot should override this with `image:` in
+# their front matter — a page-specific preview always beats the profile photo.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/Mike%20Miller.jpg

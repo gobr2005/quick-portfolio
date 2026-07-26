@@ -1,4 +1,10 @@
-# Order Location SQL 
+---
+layout: default
+title: Order Location SQL
+description: A BigQuery SQL query that normalizes BigCommerce shipping addresses to consistent state names to show where orders are actually shipping.
+---
+
+## Order Location SQL
 
 [View code](https://github.com/gobr2005/BigCommerceCode/tree/main/order_location)
 
