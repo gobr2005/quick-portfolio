@@ -157,11 +157,19 @@ function frontMatter(file) {
 
 const linkedPages = new Set();
 const referencedImages = new Set();
+/** Pages with `published: false` — Jekyll skips these entirely, so they are drafts in
+ *  progress rather than broken pages, and most checks would just be noise. */
+const drafts = new Set();
 
 for (const file of rootMarkdown) {
   const name = rel(file);
   const text = read(file);
   const fm = frontMatter(file);
+
+  if (fm && fm !== BROKEN && fm.published === 'false') {
+    drafts.add(name);
+    warn(name, 'Draft (published: false) — Jekyll will not build it. Remove that key when the page is ready.');
+  }
 
   if (fm && fm !== BROKEN) {
     if (!fm.layout) warn(name, 'Front matter has no "layout: default". With front matter present, do not rely on jekyll-default-layout.');
@@ -251,7 +259,7 @@ for (const file of rootMarkdown) {
 
 for (const file of rootMarkdown) {
   const name = rel(file);
-  if (name === 'index.md') continue;
+  if (name === 'index.md' || drafts.has(name)) continue;
   if (!linkedPages.has(name)) {
     warn(name, 'Nothing links to this page. Jekyll will publish it, but no visitor can reach it — add it to a section of index.md.');
   }
