@@ -113,17 +113,18 @@ entries in that section have one; the Codecademy section does, the others don't.
 
 ## Step 5 — Check it before pushing
 
-There's no way to preview locally, so these checks stand in for a build. They take a
-minute and catch what actually breaks:
+There's no way to preview locally, so run the validator — it checks front matter, links,
+images, code fences, plugins, and Liquid balance in about a second:
 
-- **Front matter parses** — opening and closing `---`, and any value containing a colon
-  is quoted. A YAML error fails the remote build silently, with an email and no site update
-- **Every link in `index.md` resolves** to a file that exists at the repo root
-- **Every `src` in the new page** points at a file that exists in `images/`
-- **Every code fence has a language tag** and its closing fence
-- **No `?raw=true`** and no fixed `height`/`width` attributes in the new markup
-- **Only allowlisted plugins** — if you touched `_config.yml`, confirm anything added is
-  on the GitHub Pages allowlist
+```bash
+node .claude/skills/jekyll-pages-check/scripts/check-site.mjs
+```
+
+Fix every ERROR before pushing; they either fail the remote build or ship something
+visibly broken. Read the WARNINGS, but don't sweep up ones belonging to files this page
+didn't touch — an unrelated cleanup buried in a content commit makes both harder to
+review. The `jekyll-pages-check` skill explains the output and what the checks can't
+catch.
 
 Then commit, push to `master`, wait about a minute, and open the live page to confirm.
 Verify the new URL renders and the index links to it. Sharing the URL through a
