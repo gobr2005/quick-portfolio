@@ -55,7 +55,27 @@
       </header>
       <section>
 
+      {% comment %}
+        Project pages are often reached straight from search or a LinkedIn post, so the
+        visitor has no history to go back to. The breadcrumb tells them up front that
+        this page belongs to a larger portfolio; the link at the end gives them
+        somewhere to go once they have finished reading, which on mobile is a long way
+        from the header. Both live here rather than in each page so new pages get them
+        automatically.
+      {% endcomment %}
+      {% if page.url != "/" %}
+      <nav aria-label="Breadcrumb" style="font-size:12px; margin-bottom:2em;">
+        <a href="{{ "/" | relative_url }}">Portfolio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ page.title | default: site.title }}</span>
+      </nav>
+      {% endif %}
+
       {{ content }}
+
+      {% if page.url != "/" %}
+      <p style="margin-top:3em;"><a href="{{ "/" | relative_url }}">&larr; Back to portfolio</a></p>
+      {% endif %}
 
       </section>
       <footer>
