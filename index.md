@@ -1,3 +1,19 @@
+---
+layout: default
+title: Portfolio
+description: Data and reporting portfolio of Michael Miller — projects in Microsoft Fabric, Power BI, SQL, Python, and BigQuery.
+---
+
+## About
+
+I created this site to share projects and document my work in data and reporting. I started learning SQL and Python in 2021, and have since built full reporting pipelines — from raw data modeling to polished dashboards.
+
+My current tech stack includes Microsoft Fabric (lakehouses and warehouses), Power BI (DAX, semantic models, row-level security, custom Deneb/Vega-Lite visuals), SQL, Python, BigQuery, Looker Studio, and GA4. I work primarily in an MSP context building KPI infrastructure, and also do freelance analytics work in the Google ecosystem.
+
+Prior background includes e-commerce analytics (BigCommerce, Brightpearl, Google Merchant Center) and SaaS integrations. I'm also exploring AI-assisted development workflows using tools like Claude and MCP integrations.
+
+---
+
 ## Portfolio
 
 ---

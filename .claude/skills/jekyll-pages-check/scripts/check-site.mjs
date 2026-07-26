@@ -69,6 +69,24 @@ const configText = existsSync(join(REPO, '_config.yml')) ? read(join(REPO, '_con
 // A site-wide `image` under `defaults:` gives every page a share card, so read it
 // before checking pages — otherwise every page looks like it has no preview image.
 const configLines = configText.split(/\r?\n/);
+
+// site.description renders into a fixed-position sidebar that does not scroll, so a
+// long one grows past the bottom of the viewport and collides with the footer. It is
+// also the homepage meta description, which search truncates around 155 characters.
+const siteDescAt = configLines.findIndex((l) => /^description:/.test(l));
+if (siteDescAt !== -1) {
+  const body = [];
+  for (let i = siteDescAt + 1; i < configLines.length; i++) {
+    if (configLines[i].trim() && !/^\s/.test(configLines[i])) break;
+    body.push(configLines[i]);
+  }
+  const plain = body.join(' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  if (plain.length > 300) {
+    err('_config.yml', `site.description is ${plain.length} characters. The theme's sidebar is fixed-position and does not scroll, so this overflows into the footer on shorter screens. Move the detail into the About section of index.md.`);
+  } else if (plain.length > 180) {
+    warn('_config.yml', `site.description is ${plain.length} characters. It renders in a non-scrolling sidebar and is the homepage meta description, so keep it tight.`);
+  }
+}
 const defaultsAt = configLines.findIndex((l) => /^defaults:\s*$/.test(l));
 if (defaultsAt !== -1) {
   // The block runs until the next top-level key (a line starting with a non-space).
