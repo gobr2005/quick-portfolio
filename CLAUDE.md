@@ -70,13 +70,15 @@ Pages build status), it has to be done in the browser instead.
 
 Not urgent, but worth knowing before touching related code:
 
-- **No per-page front matter**, so every page emits the same site-wide `description`
-  from `_config.yml` and there is **no `og:image`** — LinkedIn shares render as a bare
-  card. New pages should set `title`/`description`/`image` front matter.
-- **Oversized images**: `images/FAA-WIldlife-Strike_Tableau.png` is 3010×1411 (677 KB)
-  displayed at 460×320, squashed out of aspect ratio. Same pattern on
-  `grade_by_variety.png`.
-- **Dead fork leftovers**, ~2.9 MB, referenced by nothing: `pdf/sample_presentation.pdf`,
-  `images/demo.gif`, `images/dummy_thumbnail.jpg`, `images/logo.png`.
 - The header photo has `alt="Logo"` in `_layouts/default.html` — it's a photo of a
   person, not a logo.
+- `images/Mike Miller.jpg` has a space in the filename, so it appears as `%20` in the
+  `og:image` URL. Works, but a rename would be tidier — it is referenced from
+  `_config.yml` in two places (`logo` and the `defaults` share image).
+- Neither project page has its own screenshot, so both fall back to the site-wide share
+  image. A page-specific one previews better.
+- **GA4**: the tag fires correctly (verified live — container initializes, `gtm.load`
+  runs). If data looks missing, the cause is GA4-side or an ad blocker, not the site.
+
+Run `node .claude/skills/jekyll-pages-check/scripts/check-site.mjs` for the current
+state rather than trusting this list — it drifts.
